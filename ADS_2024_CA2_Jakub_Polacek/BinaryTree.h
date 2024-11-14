@@ -1,7 +1,6 @@
 ﻿#pragma once
 #include "BSTNode.h"
 
-#include <vector>
 template <class T>
 class BinaryTree
 {
