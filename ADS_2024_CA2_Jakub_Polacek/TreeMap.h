@@ -15,6 +15,8 @@ public:
 	bool containsKey(K key);
 	BinaryTree<K> keySet();
 
+	int size();
+
 };
 
 template <class K, class V>
@@ -42,7 +44,9 @@ V& TreeMap<K, V>::get(K key)
 	}
 	catch (logic_error e)
 	{
-		cout << e.what();
+		//cout << e.what();
+		V v;
+		return v;
 	}
 }
 
@@ -68,9 +72,8 @@ bool TreeMap<K, V>::containsKey(K key)
 }
 
 template <class K, class V>
-BinaryTree<K> TreeMap<K, V>::keySet()
+int TreeMap<K, V>::size()
 {
-	
-
+	return tree.count();
 
 }
