@@ -9,9 +9,11 @@ class TreeMap
 
 public:
 	TreeMap();
-	TreeMap(K key, V value);
 	void add(K& key, V& value);
 	V& get(K key);
+	void clear();
+	bool containsKey(K key);
+	BinaryTree<K> keySet();
 
 };
 
@@ -32,5 +34,43 @@ template <class K, class V>
 V& TreeMap<K, V>::get(K key)
 {
 	Entity<K, V> e(key, V());
-	return tree.get(e).value;
+	try
+	{
+		//split into 2 lines to ensure that get method is getting entity, so that value is always there
+		Entity<K, V> ent = tree.get(e);
+		return ent.getValue();
+	}
+	catch (logic_error e)
+	{
+		cout << e.what();
+	}
+}
+
+template <class K, class V>
+void TreeMap<K, V>::clear()
+{
+	tree.clear();
+}
+
+template <class K, class V>
+bool TreeMap<K, V>::containsKey(K key)
+{
+	Entity<K, V> e(key, V());
+	try
+	{
+		tree.get(e).getValue();
+		return true;
+	}
+	catch (logic_error e)
+	{
+		return false;
+	}
+}
+
+template <class K, class V>
+BinaryTree<K> TreeMap<K, V>::keySet()
+{
+	
+
+
 }
