@@ -6,6 +6,7 @@ template <class K, class V>
 class TreeMap
 {
 	BinaryTree<Entity<K, V>> tree;
+	void keyPreOrder(BSTNode<Entity<K, V>>* node, BinaryTree<K>& out);
 
 public:
 	TreeMap();
@@ -69,6 +70,32 @@ bool TreeMap<K, V>::containsKey(K key)
 	{
 		return false;
 	}
+}
+
+template <class K, class V>
+void TreeMap<K, V>::keyPreOrder(BSTNode<Entity<K, V>>* node, BinaryTree<K>& out)
+{
+	if (node != nullptr)
+	{
+		//process
+		Entity<K, V> e = node->getItem();
+		int a = e.getKey();
+		out.add(a);
+
+		//left
+		keyPreOrder(node->getLeft(), out);
+
+		//right
+		keyPreOrder(node->getRight(), out);
+	}
+}
+
+template <class K, class V>
+BinaryTree<K> TreeMap<K, V>::keySet()
+{
+	BinaryTree<K> keySet;
+	keyPreOrder(tree.root, keySet);
+	return keySet;
 }
 
 template <class K, class V>

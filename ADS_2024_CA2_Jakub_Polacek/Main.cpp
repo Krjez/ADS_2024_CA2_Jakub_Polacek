@@ -21,7 +21,11 @@ int main()
 		cout << "X key found" << endl;
 	}
 
-	tree.clear();
+	//tree.clear();
+
+	BinaryTree<int> set = tree.keySet();
+
+	set.printInOrder();
 
 
 	return 0;
