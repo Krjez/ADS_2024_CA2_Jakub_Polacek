@@ -70,12 +70,18 @@ void app1()
         {
             if (dictionary.containsKey(word[0]))
             {
+                bool unique = true;
                 for (string &w : dictionary.get(word[0]))
                 {
-                    if (!(w == word))
+                    if (w == word)
                     {
-                        dictionary.get(word[0]).push_back(word);
+                        unique = false;
                     }
+                }
+
+                if (unique)
+                {
+                    dictionary.get(word[0]).push_back(word);
                 }
             }
             else
