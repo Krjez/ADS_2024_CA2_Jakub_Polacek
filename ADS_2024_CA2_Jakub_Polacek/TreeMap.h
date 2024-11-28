@@ -12,11 +12,14 @@ public:
 	TreeMap();
 	void put(K& key, V& value);
 	V& get(K key);
+	V& operator[](K key);
 	void clear();
+
 	bool containsKey(K key);
 	BinaryTree<K> keySet();
+	bool removeKey(K key);
+	
 	int size();
-
 };
 
 template <class K, class V>
@@ -57,6 +60,12 @@ V& TreeMap<K, V>::get(K key)
 		V v;
 		return v;
 	}
+}
+
+template <class K, class V>
+V& TreeMap<K, V>::operator[](K key)
+{
+	return get(key);
 }
 
 template <class K, class V>
@@ -108,4 +117,11 @@ int TreeMap<K, V>::size()
 {
 	return tree.count();
 
+}
+
+template <class K, class V>
+bool TreeMap<K, V>::removeKey(K key)
+{
+	Entity<K, V> e(key, V());
+	return tree.remove(e);
 }

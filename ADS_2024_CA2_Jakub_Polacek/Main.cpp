@@ -5,29 +5,26 @@ int main()
 	TreeMap<int, string> tree;
 	int x = 12;
 	int y = 5;
+	int z = 10;
 	string a = "aaa";
 	string b = "bbb";
-	tree.get(x);
+	string c = "ccc";
 
 	tree.put(x, a);
 	tree.put(y, b);
+	tree.put(z, c);
 
 	cout << "Size: " << tree.size() << endl;
 
 	cout << tree.get(x) << endl;
 
-	if (tree.containsKey(x))
-	{
-		cout << "X key found" << endl;
-	}
-	tree.put(x,  b);
-	cout << tree.get(x) << endl;
-	//tree.clear();
-
 	BinaryTree<int> set = tree.keySet();
-
 	set.printInOrder();
 
+	tree.removeKey(x);
+
+	set = tree.keySet();
+	set.printInOrder();
 
 	return 0;
 }
