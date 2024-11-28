@@ -1,30 +1,39 @@
 #include "TreeMap.h"
+#include <fstream>
+#include <string>
+#include <vector>
+
 
 int main()
 {
-	TreeMap<int, string> tree;
-	int x = 12;
-	int y = 5;
-	int z = 10;
-	string a = "aaa";
-	string b = "bbb";
-	string c = "ccc";
 
-	tree.put(x, a);
-	tree.put(y, b);
-	tree.put(z, c);
+    TreeMap<char, vector<string>> dictionary;
 
-	cout << "Size: " << tree.size() << endl;
+    //50 words file, 2 words repeated - mold, egg
+    ifstream file("text.txt");
 
-	cout << tree.get(x) << endl;
+    if (!file.is_open()) {
+        cerr << "Error opening the file!";
+    }
+    string word;
+    while (getline(file, word))
+    {
+        if (dictionary.containsKey(word[0]))
+        {
+            dictionary.get(word[0]).push_back(word);
+        }
+        else
+        {
+            vector<string> v = {word};
+            dictionary.put(word[0], v);
+        }
+    }
 
-	BinaryTree<int> set = tree.keySet();
-	set.printInOrder();
+    file.close();
 
-	tree.removeKey(x);
+    BinaryTree<char> set = dictionary.keySet();
+    set.printInOrder();
 
-	set = tree.keySet();
-	set.printInOrder();
 
 	return 0;
 }

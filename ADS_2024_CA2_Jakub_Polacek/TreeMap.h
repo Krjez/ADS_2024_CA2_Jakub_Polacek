@@ -95,7 +95,7 @@ void TreeMap<K, V>::keyPreOrder(BSTNode<Entity<K, V>>* node, BinaryTree<K>& out)
 	if (node != nullptr)
 	{
 		Entity<K, V> e = node->getItem();
-		int a = e.getKey();
+		K a = e.getKey();
 		out.add(a);
 
 		keyPreOrder(node->getLeft(), out);
