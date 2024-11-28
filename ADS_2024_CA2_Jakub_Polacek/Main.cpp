@@ -9,8 +9,8 @@ int main()
 	string b = "bbb";
 	tree.get(x);
 
-	tree.add(x, a);
-	tree.add(y, b);
+	tree.put(x, a);
+	tree.put(y, b);
 
 	cout << "Size: " << tree.size() << endl;
 
@@ -20,7 +20,8 @@ int main()
 	{
 		cout << "X key found" << endl;
 	}
-
+	tree.put(x,  b);
+	cout << tree.get(x) << endl;
 	//tree.clear();
 
 	BinaryTree<int> set = tree.keySet();

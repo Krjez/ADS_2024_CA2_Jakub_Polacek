@@ -10,12 +10,11 @@ class TreeMap
 
 public:
 	TreeMap();
-	void add(K& key, V& value);
+	void put(K& key, V& value);
 	V& get(K key);
 	void clear();
 	bool containsKey(K key);
 	BinaryTree<K> keySet();
-
 	int size();
 
 };
@@ -27,9 +26,18 @@ TreeMap<K, V>::TreeMap()
 }
 
 template <class K, class V>
-void TreeMap<K, V>::add(K& key, V& value)
+void TreeMap<K, V>::put(K& key, V& value)
 {
 	Entity<K, V> e(key, value);
+	try
+	{
+		tree.get(e);
+		tree.remove(e);
+	}
+	catch (logic_error e)
+	{
+	}
+	
 	tree.add(e);
 }
 
@@ -40,12 +48,12 @@ V& TreeMap<K, V>::get(K key)
 	try
 	{
 		//split into 2 lines to ensure that get method is getting entity, so that value is always there
-		Entity<K, V> ent = tree.get(e);
+		Entity<K, V> &ent = tree.get(e);
 		return ent.getValue();
 	}
 	catch (logic_error e)
 	{
-		//cout << e.what();
+		cout << e.what();
 		V v;
 		return v;
 	}
@@ -77,15 +85,12 @@ void TreeMap<K, V>::keyPreOrder(BSTNode<Entity<K, V>>* node, BinaryTree<K>& out)
 {
 	if (node != nullptr)
 	{
-		//process
 		Entity<K, V> e = node->getItem();
 		int a = e.getKey();
 		out.add(a);
 
-		//left
 		keyPreOrder(node->getLeft(), out);
 
-		//right
 		keyPreOrder(node->getRight(), out);
 	}
 }
