@@ -4,9 +4,11 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <list>
 
 void app1();
 void app2();
+bool sToBool(string s);
 
 int main()
 {
@@ -159,10 +161,11 @@ void app2()
         {
             in = stoi(input);
 
+            run = false;
+
             switch (in)
             {
             case 0:
-                run = false;
                 break;
             case 1:
                 field = "baseSetSize";
@@ -229,14 +232,16 @@ void app2()
                 break;
             default:
                 cout << "Not a valid choice." << endl;
+                run = true;
                 break;
             }
         }
         catch (logic_error e)
         {
             cout << "Not a number, try again." << endl;
-            //cout << e.what();
+            cout << e.what();
         }
+    }
 #pragma endregion User Selection
 
 #pragma region File Read & Index Creation
@@ -252,25 +257,107 @@ void app2()
             while (getline(file, line))
             {
                 stringstream lineStream(line);
+                list<string> lineList;
+                string quotes;
+                bool quotesOpen = false;
 
                 while (getline(lineStream, value, ','))
-                {
-                    MTGSet set;
-                    if (index.containsKey(value))
+                {   
+                    if (quotesOpen)
                     {
-                        index.get(value).push_back(set);
+                        quotes.append(value);
+                        if (value.back() == '"')
+                        {
+                            quotesOpen = false;
+                            lineList.push_back(quotes);
+                            quotes.clear();
+                        }
+                    }
+                    else if (value[0] == '"')
+                    {
+                        quotes.append(value);
+                        quotesOpen = true;
                     }
                     else
                     {
-                        vector<MTGSet> vec = { set };
-                        index.put(value, vec);
+                        lineList.push_back(value);
                     }
-                } 
+                }
+
+                int baseSetSize = stoi(lineList.front());
+                lineList.pop_front();
+
+                string block = lineList.front();
+                lineList.pop_front();
+                float cardsphereSetId = stof(lineList.front());
+                lineList.pop_front();
+                string code = lineList.front();
+                lineList.pop_front();
+                bool isFoilOnly = sToBool(lineList.front());
+                lineList.pop_front();
+                bool isForeignOnly = sToBool(lineList.front());
+                lineList.pop_front();
+                bool isNonFoilOnly = sToBool(lineList.front());
+                lineList.pop_front();
+                bool isOnlineOnly = sToBool(lineList.front());
+                lineList.pop_front();
+                bool isPartialPreview = sToBool(lineList.front());
+                lineList.pop_front();
+                string keyruneCode = lineList.front();
+                lineList.pop_front();
+                string languages = lineList.front();
+                lineList.pop_front();
+                float mcmId = stof(lineList.front());
+                lineList.pop_front();
+                float mcmIdExtras = stof(lineList.front());
+                lineList.pop_front();
+                string mcmName = lineList.front();
+                lineList.pop_front();
+                string mtgoCode = lineList.front();
+                lineList.pop_front();
+                string name = lineList.front();
+                lineList.pop_front();
+                string parentCode = lineList.front();
+                lineList.pop_front();
+                string releaseDate = lineList.front();
+                lineList.pop_front();
+                float tcgplayerGroupId = stof(lineList.front());
+                lineList.pop_front();
+                string tokenSetCode = lineList.front();
+                lineList.pop_front();
+                int totalSetSize = stoi(lineList.front());
+                lineList.pop_front();
+                string type = lineList.front();
+                lineList.pop_front();
+
+                MTGSet set = { baseSetSize, block, cardsphereSetId, code, isFoilOnly, isForeignOnly, isNonFoilOnly, isOnlineOnly, isPartialPreview, keyruneCode, languages, mcmId, mcmIdExtras, mcmName, mtgoCode, name, parentCode, releaseDate, tcgplayerGroupId, tokenSetCode, totalSetSize, type };
+
+
+                if (index.containsKey(value))
+                {
+                    index.get(value).push_back(set);
+                }
+                else
+                {
+                    vector<MTGSet> vec = { set };
+                    index.put(value, vec);
+                }
             }
             file.close();
 
         }
 #pragma endregion File Read & Index Creation
 
+    
+    BinaryTree<string> bt = index.keySet();
+    bt.printInOrder();
+}
+
+bool sToBool(string s)
+{
+    if (s == "True")
+    {
+        return true;
     }
+    return false;
 }
