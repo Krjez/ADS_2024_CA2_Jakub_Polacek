@@ -2,6 +2,7 @@
 #include "MTGSet.h"
 #include <fstream>
 #include <string>
+#include <sstream>
 #include <vector>
 
 void app1();
@@ -118,10 +119,14 @@ void app1()
 
 void app2()
 {
+    TreeMap<string, vector<MTGSet>> index;
+    string field;
+
     bool run = true;
     string input;
     int in;
-
+    
+#pragma region User Selection
     while (run)
     {
         cout << "\nWhat field do you want to create an index on?" << endl;
@@ -137,18 +142,17 @@ void app2()
         cout << "9: keyruneCode" << endl;
         cout << "10: languages" << endl;
         cout << "11: mcmId" << endl;
-        cout << "11: mcmIdExtras" << endl;
-        cout << "12: mcmName" << endl;
-        cout << "13: mtgoCode" << endl;
-        cout << "14: name" << endl;
-        cout << "15: parentCode" << endl;
-        cout << "16: releaseDate" << endl;
-        cout << "17: tcgplayerGroupId" << endl;
-        cout << "18: tokenSetCode" << endl;
-        cout << "19: totalSetSize" << endl;
-        cout << "20: type" << endl;
+        cout << "12: mcmIdExtras" << endl;
+        cout << "13: mcmName" << endl;
+        cout << "14: mtgoCode" << endl;
+        cout << "15: name" << endl;
+        cout << "16: parentCode" << endl;
+        cout << "17: releaseDate" << endl;
+        cout << "18: tcgplayerGroupId" << endl;
+        cout << "19: tokenSetCode" << endl;
+        cout << "20: totalSetSize" << endl;
+        cout << "21: type" << endl;
         cout << "Please type in a number:" << endl;
-
 
         getline(cin, input);
         try
@@ -161,47 +165,70 @@ void app2()
                 run = false;
                 break;
             case 1:
+                field = "baseSetSize";
                 break;
             case 2:
+                field = "block";
                 break;
             case 3:
+                field = "cardsphereSetId";
                 break;
             case 4:
+                field = "isFoilOnly";
                 break;
             case 5:
+                field = "isForeignOnly";
                 break;
             case 6:
+                field = "isNonFoilOnly";
                 break;
             case 7:
+                field = "isOnlineOnly";
                 break;
             case 8:
+                field = "isPartialPreview";
                 break;
             case 9:
+                field = "keyruneCode";
                 break;
             case 10:
+                field = "languages";
                 break;
             case 11:
+                field = "mcmId";
                 break;
             case 12:
+                field = "mcmIdExtras";
                 break;
             case 13:
+                field = "mcmName";
                 break;
             case 14:
+                field = "mtgoCode";
                 break;
             case 15:
+                field = "name";
                 break;
             case 16:
+                field = "parentCode";
                 break;
             case 17:
+                field = "releaseDate";
                 break;
             case 18:
+                field = "tcgplayerGroupId";
                 break;
             case 19:
+                field = "tokenSetCode";
                 break;
             case 20:
+                field = "totalSetSize";
+                break;
+            case 21:
+                field = "type";
                 break;
             default:
-                cout << "Not a valid number." << endl;
+                cout << "Not a valid choice." << endl;
                 break;
             }
         }
@@ -210,9 +237,40 @@ void app2()
             cout << "Not a number, try again." << endl;
             //cout << e.what();
         }
+#pragma endregion User Selection
 
-    
+#pragma region File Read & Index Creation
+        ifstream file("sets.csv");
 
+        if (!file.is_open()) {
+            cerr << "Error opening the file!" << endl;
+        }
+        else
+        {
+            string line, value;
+
+            while (getline(file, line))
+            {
+                stringstream lineStream(line);
+
+                while (getline(lineStream, value, ','))
+                {
+                    MTGSet set;
+                    if (index.containsKey(value))
+                    {
+                        index.get(value).push_back(set);
+                    }
+                    else
+                    {
+                        vector<MTGSet> vec = { set };
+                        index.put(value, vec);
+                    }
+                } 
+            }
+            file.close();
+
+        }
+#pragma endregion File Read & Index Creation
 
     }
 }

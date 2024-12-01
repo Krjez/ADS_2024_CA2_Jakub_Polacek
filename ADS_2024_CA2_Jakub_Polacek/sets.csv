@@ -1,4 +1,3 @@
-baseSetSize,block,cardsphereSetId,code,isFoilOnly,isForeignOnly,isNonFoilOnly,isOnlineOnly,isPartialPreview,keyruneCode,languages,mcmId,mcmIdExtras,mcmName,mtgoCode,name,parentCode,releaseDate,tcgplayerGroupId,tokenSetCode,totalSetSize,type
 383,Core Set,755.0,10E,False,,,False,,10E,"Chinese Simplified, English, French, German, Italian, Japanese, Portuguese (Brazil), Russian, Spanish",74.0,,Tenth Edition,10E,Tenth Edition,,2007-07-13,1.0,T10E,510,core
 302,Core Set,938.0,2ED,False,,True,False,,2ED,English,,,,,Unlimited Edition,,1993-12-01,115.0,,302,core
 331,,1462.0,2X2,False,,,False,,2X2,"Chinese Simplified, English, French, German, Japanese",5070.0,5071.0,Double Masters 2022,,Double Masters 2022,,2022-07-08,3070.0,T2X2,579,masters
