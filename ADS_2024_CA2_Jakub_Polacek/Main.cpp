@@ -8,7 +8,10 @@
 
 void app1();
 void app2();
-bool sToBool(string s);
+void lineFront(string& s, list<string>& list);
+void lineFront(int& i, list<string>& list);
+void lineFront(float& f, list<string>& list);
+void lineFront(bool& b, list<string>& list);
 
 int main()
 {
@@ -284,51 +287,51 @@ void app2()
                     }
                 }
 
-                int baseSetSize = stoi(lineList.front());
-                lineList.pop_front();
+                int baseSetSize;
+                string block;
+                float cardsphereSetId;
+                string code;
+                bool isFoilOnly;
+                bool isForeignOnly;
+                bool isNonFoilOnly;
+                bool isOnlineOnly;
+                bool isPartialPreview;
+                string keyruneCode;
+                string languages;
+                float mcmId;
+                float mcmIdExtras;
+                string mcmName;
+                string mtgoCode;
+                string name;
+                string parentCode;
+                string releaseDate;
+                float tcgplayerGroupId;
+                string tokenSetCode;
+                int totalSetSize;
+                string type;
 
-                string block = lineList.front();
-                lineList.pop_front();
-                float cardsphereSetId = stof(lineList.front());
-                lineList.pop_front();
-                string code = lineList.front();
-                lineList.pop_front();
-                bool isFoilOnly = sToBool(lineList.front());
-                lineList.pop_front();
-                bool isForeignOnly = sToBool(lineList.front());
-                lineList.pop_front();
-                bool isNonFoilOnly = sToBool(lineList.front());
-                lineList.pop_front();
-                bool isOnlineOnly = sToBool(lineList.front());
-                lineList.pop_front();
-                bool isPartialPreview = sToBool(lineList.front());
-                lineList.pop_front();
-                string keyruneCode = lineList.front();
-                lineList.pop_front();
-                string languages = lineList.front();
-                lineList.pop_front();
-                float mcmId = stof(lineList.front());
-                lineList.pop_front();
-                float mcmIdExtras = stof(lineList.front());
-                lineList.pop_front();
-                string mcmName = lineList.front();
-                lineList.pop_front();
-                string mtgoCode = lineList.front();
-                lineList.pop_front();
-                string name = lineList.front();
-                lineList.pop_front();
-                string parentCode = lineList.front();
-                lineList.pop_front();
-                string releaseDate = lineList.front();
-                lineList.pop_front();
-                float tcgplayerGroupId = stof(lineList.front());
-                lineList.pop_front();
-                string tokenSetCode = lineList.front();
-                lineList.pop_front();
-                int totalSetSize = stoi(lineList.front());
-                lineList.pop_front();
-                string type = lineList.front();
-                lineList.pop_front();
+                lineFront(baseSetSize, lineList);
+                lineFront(block, lineList);
+                lineFront(cardsphereSetId, lineList);
+                lineFront(code, lineList);
+                lineFront(isFoilOnly, lineList);    
+                lineFront(isForeignOnly, lineList);
+                lineFront(isNonFoilOnly, lineList);
+                lineFront(isOnlineOnly, lineList);
+                lineFront(isPartialPreview, lineList);
+                lineFront(keyruneCode, lineList);
+                lineFront(languages, lineList);
+                lineFront(mcmId, lineList);
+                lineFront(mcmIdExtras, lineList);
+                lineFront(mcmName, lineList);
+                lineFront(mtgoCode, lineList);
+                lineFront(name, lineList);
+                lineFront(parentCode, lineList);
+                lineFront(releaseDate, lineList);
+                lineFront(tcgplayerGroupId, lineList);
+                lineFront(tokenSetCode, lineList);
+                lineFront(totalSetSize, lineList);
+                lineFront(type, lineList);
 
                 MTGSet set = { baseSetSize, block, cardsphereSetId, code, isFoilOnly, isForeignOnly, isNonFoilOnly, isOnlineOnly, isPartialPreview, keyruneCode, languages, mcmId, mcmIdExtras, mcmName, mtgoCode, name, parentCode, releaseDate, tcgplayerGroupId, tokenSetCode, totalSetSize, type };
 
@@ -353,11 +356,49 @@ void app2()
     bt.printInOrder();
 }
 
-bool sToBool(string s)
+
+void lineFront(int& i, list<string>& list)
 {
-    if (s == "True")
+    if (list.front() == "")
     {
-        return true;
+        i = 0;
     }
-    return false;
+    else
+    {
+        i = stoi(list.front());
+    }
+    list.pop_front();
+}
+
+void lineFront(float& f, list<string>& list)
+{
+    if (list.front() == "")
+    {
+        f = 0;
+    }
+    else
+    {
+        f = stof(list.front());
+    }
+    list.pop_front();
+}
+
+
+void lineFront(bool& b, list<string>& list)
+{
+    if (list.front() == "True")
+    {
+        b = true;
+    }
+    else
+    {
+        b = false;
+    }
+    list.pop_front();
+}
+
+void lineFront(string& s, list<string>& list)
+{
+    s = list.front();
+    list.pop_front();
 }
