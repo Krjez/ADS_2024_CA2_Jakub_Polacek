@@ -126,10 +126,10 @@ void app2()
 {
     TreeMap<string, vector<MTGSet>> index;
     string field;
+    int id;
 
     bool run = true;
     string input;
-    int in;
     
 #pragma region User Selection
     while (run)
@@ -139,34 +139,35 @@ void app2()
         cout << "1: baseSetSize" << endl;
         cout << "2: block" << endl;
         cout << "3: cardsphereSetId" << endl;
-        cout << "4: isFoilOnly" << endl;
-        cout << "5: isForeignOnly" << endl;
-        cout << "6: isNonFoilOnly" << endl;
-        cout << "7: isOnlineOnly" << endl;
-        cout << "8: isPartialPreview" << endl;
-        cout << "9: keyruneCode" << endl;
-        cout << "10: languages" << endl;
-        cout << "11: mcmId" << endl;
-        cout << "12: mcmIdExtras" << endl;
-        cout << "13: mcmName" << endl;
-        cout << "14: mtgoCode" << endl;
-        cout << "15: name" << endl;
-        cout << "16: parentCode" << endl;
-        cout << "17: releaseDate" << endl;
-        cout << "18: tcgplayerGroupId" << endl;
-        cout << "19: tokenSetCode" << endl;
-        cout << "20: totalSetSize" << endl;
-        cout << "21: type" << endl;
+        cout << "4: code" << endl;
+        cout << "5: isFoilOnly" << endl;
+        cout << "6: isForeignOnly" << endl;
+        cout << "7: isNonFoilOnly" << endl;
+        cout << "8: isOnlineOnly" << endl;
+        cout << "9: isPartialPreview" << endl;
+        cout << "10: keyruneCode" << endl;
+        cout << "11: languages" << endl;
+        cout << "12: mcmId" << endl;
+        cout << "13: mcmIdExtras" << endl;
+        cout << "14: mcmName" << endl;
+        cout << "15: mtgoCode" << endl;
+        cout << "16: name" << endl;
+        cout << "17: parentCode" << endl;
+        cout << "18: releaseDate" << endl;
+        cout << "19: tcgplayerGroupId" << endl;
+        cout << "20: tokenSetCode" << endl;
+        cout << "21: totalSetSize" << endl;
+        cout << "22: type" << endl;
         cout << "Please type in a number:" << endl;
 
         getline(cin, input);
         try
         {
-            in = stoi(input);
+            id = stoi(input);
 
             run = false;
 
-            switch (in)
+            switch (id)
             {
             case 0:
                 break;
@@ -180,57 +181,60 @@ void app2()
                 field = "cardsphereSetId";
                 break;
             case 4:
-                field = "isFoilOnly";
+                field = "code";
                 break;
             case 5:
-                field = "isForeignOnly";
+                field = "isFoilOnly";
                 break;
             case 6:
-                field = "isNonFoilOnly";
+                field = "isForeignOnly";
                 break;
             case 7:
-                field = "isOnlineOnly";
+                field = "isNonFoilOnly";
                 break;
             case 8:
-                field = "isPartialPreview";
+                field = "isOnlineOnly";
                 break;
             case 9:
-                field = "keyruneCode";
+                field = "isPartialPreview";
                 break;
             case 10:
-                field = "languages";
+                field = "keyruneCode";
                 break;
             case 11:
-                field = "mcmId";
+                field = "languages";
                 break;
             case 12:
-                field = "mcmIdExtras";
+                field = "mcmId";
                 break;
             case 13:
-                field = "mcmName";
+                field = "mcmIdExtras";
                 break;
             case 14:
-                field = "mtgoCode";
+                field = "mcmName";
                 break;
             case 15:
-                field = "name";
+                field = "mtgoCode";
                 break;
             case 16:
-                field = "parentCode";
+                field = "name";
                 break;
             case 17:
-                field = "releaseDate";
+                field = "parentCode";
                 break;
             case 18:
-                field = "tcgplayerGroupId";
+                field = "releaseDate";
                 break;
             case 19:
-                field = "tokenSetCode";
+                field = "tcgplayerGroupId";
                 break;
             case 20:
-                field = "totalSetSize";
+                field = "tokenSetCode";
                 break;
             case 21:
+                field = "totalSetSize";
+                break;
+            case 22:
                 field = "type";
                 break;
             default:
@@ -333,6 +337,51 @@ void app2()
                 lineFront(totalSetSize, lineList);
                 lineFront(type, lineList);
 
+                if (id == 1)
+                    value = baseSetSize;
+                if (id == 2)
+                    value = block;
+                if (id == 3)
+                    value = cardsphereSetId;
+                if (id == 4)
+                    value = code;
+                if (id == 5)
+                    value = isFoilOnly;
+                if (id == 6)
+                    value = isForeignOnly;
+                if (id == 7)
+                    value = isNonFoilOnly;
+                if (id == 8)
+                    value = isOnlineOnly;
+                if (id == 9)
+                    value = isPartialPreview;
+                if (id == 10)
+                    value = keyruneCode;
+                if (id == 11)
+                    value = languages;
+                if (id == 12)
+                    value = mcmId;
+                if (id == 13)
+                    value = mcmIdExtras;
+                if (id == 14)
+                    value = mcmName;
+                if (id == 15)
+                    value = mtgoCode;
+                if (id == 16)
+                    value = name;
+                if (id == 17)
+                    value = parentCode;
+                if (id == 18)
+                    value = releaseDate;
+                if (id == 19)
+                    value = tcgplayerGroupId;
+                if (id == 20)
+                    value = tokenSetCode;
+                if (id == 21)
+                    value = totalSetSize;
+                if (id == 22)
+                    value = type;
+
                 MTGSet set = { baseSetSize, block, cardsphereSetId, code, isFoilOnly, isForeignOnly, isNonFoilOnly, isOnlineOnly, isPartialPreview, keyruneCode, languages, mcmId, mcmIdExtras, mcmName, mtgoCode, name, parentCode, releaseDate, tcgplayerGroupId, tokenSetCode, totalSetSize, type };
 
 
@@ -356,7 +405,7 @@ void app2()
     bt.printInOrder();
 }
 
-
+#pragma region Helper Methods for Indexing
 void lineFront(int& i, list<string>& list)
 {
     if (list.front() == "")
@@ -383,7 +432,6 @@ void lineFront(float& f, list<string>& list)
     list.pop_front();
 }
 
-
 void lineFront(bool& b, list<string>& list)
 {
     if (list.front() == "True")
@@ -402,3 +450,4 @@ void lineFront(string& s, list<string>& list)
     s = list.front();
     list.pop_front();
 }
+#pragma endregion
